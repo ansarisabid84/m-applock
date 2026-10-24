@@ -1,0 +1,34 @@
+YOUTUBE UPLOAD NOTES (do not paste this file into YouTube; use youtube_description.txt for the description box)
+
+=== TITLE (max 100 characters) ===
+How to Use AppLock: Lock Any Android App in Under a Minute
+
+Alternatives:
+- AppLock for Android: Set Up, Lock Apps and Catch Intruders (Step by Step)
+- How to Lock Apps on Android with a PIN or Pattern | AppLock Tutorial
+
+
+=== DESCRIPTION ===
+Paste the whole of youtube_description.txt. It has no angle brackets (YouTube rejects the
+characters less-than and greater-than in descriptions) and is well under the 5,000 limit.
+
+
+=== TAGS (paste into the Tags box, comma separated) ===
+AppLock, app lock, how to lock apps on android, android app lock, lock apps with pin, lock apps with pattern, app locker, protect apps android, intruder selfie, intruder photo, timed unlock, lock profiles, private browser, encrypted vault, android privacy, android security, AppLock tutorial, AppLock setup
+
+
+=== UPLOAD SETTINGS CHECKLIST ===
+- Video file:       applock-how-to-use-1920x1080.mp4
+- Thumbnail:        thumbnail-1280x720.png (Customize, then Thumbnail, then Upload)
+- Audience:         "No, it's not made for kids"
+- Visibility:       Public (or Unlisted while you test)
+- Category:         Tools (or Education)
+- Comments:         On
+- Monetisation:     Off, so the video can be used as a Play Store promo video
+- Age restriction:  None
+
+After it's live, copy the video's YouTube URL into Play Console:
+Grow, then Store presence, then Main store listing, then Graphics, then Promo video.
+
+Optional pinned comment:
+"Get AppLock on Google Play: https://play.google.com/store/apps/details?id=com.sabid.applock  Which feature would you like a deeper tutorial on?"

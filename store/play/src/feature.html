@@ -1,0 +1,76 @@
+<!doctype html><meta charset="utf-8">
+<!--
+  Play Store feature graphic, 1024x500. Same brass-on-midnight palette as the app's
+  MIDNIGHT theme (#0E1116 base, #C79A46 accent) so the listing and the installed app
+  read as one thing. No device frames, no fake UI, no download buttons — all of which
+  Play's metadata policy either bans or penalises.
+-->
+<style>
+  html, body { margin: 0; padding: 0; width: 1024px; height: 500px; overflow: hidden; }
+  body {
+    background: #0E1116;
+    font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+  /* Warm light source behind the shield, matching the icon's radial background. */
+  .glow {
+    position: absolute; left: -140px; top: -220px; width: 900px; height: 900px;
+    background: radial-gradient(circle at center, #3A2C1A 0%, rgba(42,32,21,0.55) 34%, rgba(14,17,22,0) 68%);
+  }
+  .sheen {
+    position: absolute; inset: 0;
+    background: linear-gradient(105deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 42%);
+  }
+  .hair { position: absolute; left: 0; right: 0; top: 0; height: 1px;
+          background: linear-gradient(90deg, rgba(199,154,70,0) 0%, rgba(199,154,70,0.55) 30%, rgba(199,154,70,0) 78%); }
+
+  .row { position: absolute; inset: 0; display: flex; align-items: center; padding: 0 60px; box-sizing: border-box; gap: 52px; }
+
+  svg.mark { flex: 0 0 auto; filter: drop-shadow(0 18px 40px rgba(0,0,0,0.55)); }
+
+  h1 { margin: 0; font-size: 86px; line-height: 1; font-weight: 700; letter-spacing: -2.2px; color: #F7F1E6; }
+  p.tag { margin: 18px 0 0; font-size: 30px; line-height: 1.25; font-weight: 400; color: #B6AB99; letter-spacing: -0.2px; }
+  .chips { margin-top: 30px; display: flex; gap: 11px; }
+  .chip {
+    font-size: 19px; color: #D8CDB8; letter-spacing: 0.1px;
+    border: 1px solid rgba(199,154,70,0.42); border-radius: 999px;
+    padding: 9px 16px; background: rgba(199,154,70,0.09);
+    display: flex; align-items: center; gap: 9px; white-space: nowrap;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: #C79A46; }
+  .foot { position: absolute; left: 328px; bottom: 30px; font-size: 19px; color: #6E6659; letter-spacing: 0.6px; }
+</style>
+
+<div class="glow"></div>
+<div class="sheen"></div>
+<div class="hair"></div>
+
+<div class="row">
+  <svg class="mark" width="216" height="216" viewBox="20 16 68 76" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="brass" gradientUnits="userSpaceOnUse" x1="27" y1="24" x2="81" y2="86">
+        <stop offset="0" stop-color="#F0D79A"/>
+        <stop offset="0.45" stop-color="#C79A46"/>
+        <stop offset="1" stop-color="#8C6A2C"/>
+      </linearGradient>
+    </defs>
+    <path d="M54,24 L81,33.5 L81,54.5 C81,70 69.5,80.5 54,86.5 C38.5,80.5 27,70 27,54.5 L27,33.5 Z" fill="url(#brass)"/>
+    <path d="M54,29.5 L76,37.3 L76,54.5 C76,67.3 66.6,76.1 54,81.2 C41.4,76.1 32,67.3 32,54.5 L32,37.3 Z"
+          fill="none" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="1.2"/>
+    <circle cx="54" cy="44" r="6.5" fill="#0E1116"/>
+    <path d="M50.6,49 L57.4,49 L59.4,66 L48.6,66 Z" fill="#0E1116"/>
+  </svg>
+
+  <div>
+    <h1>AppLock</h1>
+    <p class="tag">Lock any app with a PIN, pattern<br>or fingerprint.</p>
+    <div class="chips">
+      <div class="chip"><span class="dot"></span>Hidden from recents</div>
+      <div class="chip"><span class="dot"></span>Intruder selfie</div>
+      <div class="chip"><span class="dot"></span>Encrypted vault</div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">WORKS OFFLINE &nbsp;·&nbsp; NO ADS &nbsp;·&nbsp; NO ACCOUNT</div>

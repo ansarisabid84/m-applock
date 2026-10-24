@@ -1,0 +1,46 @@
+AppLock puts a lock screen in front of the apps you choose, so only you can open them. Everything runs on your phone: no account, no ads, no analytics and no cloud.
+
+LOCK YOUR WAY
+• Unlock with a PIN (4, 6 or 8 digits), a pattern, your fingerprint or face, or your phone's own screen lock
+• Scrambled keypad and invisible pattern, so nobody can read your code over your shoulder
+• Choose when to ask again: every time, until the screen turns off, after a short exit, or until restart
+• Lock screen that adapts to portrait and landscape
+
+MADE TO SAVE YOU TIME
+• Timed unlock: open an app for 15 minutes, 30 minutes, 1 hour or 2 hours, then it relocks itself
+• Lock profiles: save sets of apps such as Work, Home or Kids and switch in one tap
+• Smart suggestions: AppLock points out messaging, photo, banking and mail apps worth locking
+• Dashboard: see how many apps are locked, unlocks today and intruder photos at a glance
+• Schedules: lock or allow apps at set times on the days you choose
+• Quick Settings tiles and a home-screen widget to switch protection on or relock everything
+
+SEE WHO TRIED
+• Intruder selfie: after repeated wrong attempts, AppLock takes a front-camera photo that stays on your phone
+• Swipe through the photos, pin the ones you want to keep, and let the rest delete themselves after the days you choose
+• Lock history: a private log of unlocks, timed unlocks and wrong attempts
+
+KEEP THINGS OUT OF SIGHT
+• Hide locked apps from the recent-apps screen
+• Encrypted vault for photos, videos and files (AES-256-GCM, key held in your phone's secure hardware)
+• Private browser with no history and no cookies, cleared when you leave
+• Optional fake "not responding" screen that hides the keypad until you press and hold the message
+• Uninstall protection, so AppLock can't be removed without going through your lock
+
+YOUR PRIVACY
+• No ads, no analytics, no account and no server
+• Your PIN is stored only as a salted hash
+• The only network use is the private browser loading pages you type in
+• Before asking for any sensitive permission, AppLock shows what it is used for and waits for your agreement. You can say no and change your mind later
+
+PERMISSIONS, EXPLAINED
+• Accessibility service (required to lock apps): AppLock reads only the name of the app that has just opened, so it knows when to show the lock screen. It cannot read your screen, messages or anything you type, and nothing leaves your phone
+• Display over other apps (required): lets AppLock draw the lock screen on top of a locked app
+• Usage access (optional): a backup way to notice which app is open if the phone stops the service
+• Camera (optional): used only for intruder photos after repeated wrong attempts
+• Notifications (optional): the protection badge and intruder alerts
+• Battery optimisation exemption (optional): keeps Android from suspending protection
+• Device administrator (optional): used only to stop AppLock being uninstalled. It cannot erase your phone, change your screen lock or lock the screen
+
+Some phone makers add their own background restrictions. If locking stops, allow AppLock to run in the background in your phone's settings.
+
+Note: AppLock protects the apps you choose on this device. Keep your recovery question up to date, because a forgotten PIN cannot be recovered without it.

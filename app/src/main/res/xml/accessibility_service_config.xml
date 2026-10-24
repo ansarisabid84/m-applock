@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Deliberately the smallest service that can do the job.
+
+    All AppLock needs is the package name of the window that just came to the front, and
+    that arrives inside the event itself. So there is no canRetrieveWindowContent, no
+    flagRetrieveInteractiveWindows and no typeWindowsChanged: nothing here can read the text
+    on your screen, which is what the KDoc on AppLockAccessibilityService promises and what
+    the system's own consent dialog will now tell the user.
+
+    It is also the more reliable configuration. A service that declares window-content
+    retrieval costs the system work on every window change and is the first thing an
+    aggressive vendor task-killer goes after, which on Xiaomi and Oppo is the difference
+    between a lock that survives the afternoon and one that does not.
+-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowStateChanged"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:canRetrieveWindowContent="false"
+    android:description="@string/accessibility_description"
+    android:notificationTimeout="60"
+    android:settingsActivity="com.sabid.applock.MainActivity" />

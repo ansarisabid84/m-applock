@@ -1,0 +1,3 @@
+-keepclassmembers class * extends android.accessibilityservice.AccessibilityService { *; }
+-keep class com.sabid.applock.service.** { *; }
+-keepclassmembers class * extends androidx.room.RoomDatabase { public <init>(); }

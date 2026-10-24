@@ -1,0 +1,143 @@
+/*
+  Shared frame + app tokens for the Play Store screenshots.
+
+  Every colour here is copied from ui/theme/Theme.kt (the MIDNIGHT palette, which is the
+  default) and every size from the composables being depicted, so the panel is a faithful
+  rendering of the real UI rather than a designer's impression of it. The `.ui` block is
+  authored in *dp* and then zoomed, which is why all the numbers inside a screen file match
+  the .dp values in the Kotlin source line for line.
+
+  Canvas is 1080x1920 (9:16). render.sh emits the same files at 1440x2560 for the 10-inch
+  tablet slot by raising Chrome's device scale factor, so there is one layout to maintain.
+*/
+:root {
+  /* Theme.kt — MIDNIGHT */
+  --acc:    #7FA8D9;   /* primary        */
+  --accdim: #3D5A7D;   /* primaryDim     */
+  --bg:     #0E1116;   /* background     */
+  --surf:   #161B22;   /* surface        */
+  --sv:     #20262E;   /* surfaceVariant */
+  --on:     #E7E9EC;   /* onBackground / onSurface */
+  --onsv:   #9BA3AE;   /* onSurfaceVariant */
+  --out:    #39414B;   /* outline        */
+  --err:    #E07A70;   /* error          */
+  --onprim: #0B0D10;   /* onPrimary      */
+  /* Icon / widget branding, not an in-app accent. */
+  --brass:  #C79A46;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; width: 1080px; height: 1920px; overflow: hidden; }
+body {
+  background: #0B0D10;
+  font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Warm light source, same one used by the icon and feature graphic. */
+.wash {
+  position: absolute; left: -180px; top: -420px; width: 1440px; height: 1180px;
+  background: radial-gradient(circle at center,
+    rgba(199,154,70,0.14) 0%, rgba(199,154,70,0.05) 38%, rgba(11,13,16,0) 70%);
+}
+
+.cap { position: absolute; top: 96px; left: 64px; right: 64px; text-align: center; }
+.cap h2 {
+  margin: 0; font-size: 62px; line-height: 1.08; font-weight: 700;
+  letter-spacing: -1.8px; color: #F4F6F8;
+}
+.cap p {
+  margin: 18px 0 0; font-size: 31px; line-height: 1.3; font-weight: 400;
+  color: #8E97A3; letter-spacing: -0.2px;
+}
+
+.panel {
+  position: absolute; left: 48px; top: 300px; width: 984px; height: 1573px;
+  border-radius: 46px; overflow: hidden; background: var(--bg);
+  border: 1px solid #242B35; box-shadow: 0 34px 90px rgba(0,0,0,0.62);
+}
+
+/* 411dp x 657dp — a phone-shaped viewport, zoomed to fill the 984px panel. */
+.ui {
+  zoom: 2.3942;
+  width: 411px; height: 657px;
+  position: relative; background: var(--bg); color: var(--on);
+  display: flex; flex-direction: column;
+}
+
+/* ---- status bar ---------------------------------------------------------- */
+.sb {
+  height: 24px; flex: 0 0 auto; display: flex; align-items: center;
+  padding: 0 14px; font-size: 11px; font-weight: 600; color: var(--on);
+  letter-spacing: 0.2px;
+}
+.sb .spacer { flex: 1; }
+.sb svg { margin-left: 5px; }
+
+/* ---- bottom navigation bar (Material3 NavigationBar, 80dp) --------------- */
+.nav {
+  flex: 0 0 auto; height: 80px; background: var(--surf);
+  display: flex; align-items: center; padding-top: 12px;
+}
+.nav .tab { flex: 1; display: flex; flex-direction: column; align-items: center; }
+.nav .ind {
+  width: 64px; height: 32px; border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.nav .tab.sel .ind { background: var(--sv); }
+.nav .tab span {
+  margin-top: 4px; font-size: 11px; font-weight: 500; letter-spacing: 0.6px;
+  color: var(--onsv);
+}
+.nav .tab.sel span { color: var(--acc); }
+.nav .tab .ico { stroke: var(--onsv); }
+.nav .tab.sel .ico { stroke: var(--acc); }
+
+/* ---- typography, mapped 1:1 onto AppLockTypography ---------------------- */
+.headlineMedium { font-size: 24px; font-weight: 600; letter-spacing: -0.3px; }
+.headlineSmall  { font-size: 20px; font-weight: 600; }
+.titleMedium    { font-size: 16px; font-weight: 500; }
+.bodyLarge      { font-size: 15px; line-height: 22px; }
+.bodyMedium     { font-size: 13px; line-height: 19px; }
+.bodySmall      { font-size: 12px; line-height: 16px; }
+.labelLarge     { font-size: 14px; font-weight: 500; letter-spacing: 0.2px; }
+.labelSmall     { font-size: 11px; font-weight: 500; letter-spacing: 0.6px; }
+.onsv { color: var(--onsv); }
+.acc  { color: var(--acc); }
+
+/* ---- Settings rows (ui/settings/SettingsScreen.kt) ----------------------- */
+.settings { flex: 1; padding: 0 16px; overflow: hidden; }
+.pcard {
+  border-radius: 22px; background: rgba(127,168,217,0.12); padding: 18px;
+  display: flex; align-items: center;
+}
+.pcard .box {
+  width: 44px; height: 44px; border-radius: 14px; background: rgba(127,168,217,0.22);
+  display: flex; align-items: center; justify-content: center; margin-right: 14px;
+}
+.pcard .txt { flex: 1; }
+.sechead {
+  padding: 26px 0 10px 6px; display: flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: var(--onsv);
+}
+.card { border-radius: 22px; background: var(--surf); padding: 6px 0; }
+.srow { padding: 12px 14px; display: flex; align-items: center; }
+.rico {
+  width: 34px; height: 34px; border-radius: 11px; background: rgba(127,168,217,0.12);
+  display: flex; align-items: center; justify-content: center;
+  margin-right: 14px; flex: 0 0 auto;
+}
+.rico.err { background: rgba(224,122,112,0.12); }
+.srow .txt { flex: 1; margin-right: 10px; }
+.rdiv { height: 1px; margin: 0 16px 0 62px; background: rgba(231,233,236,0.06); }
+.hint { padding: 12px 16px; font-size: 13px; line-height: 19px; color: var(--onsv); }
+.chev { flex: 0 0 auto; }
+
+/* ---- Material3 Switch (52x32 track, 24dp thumb when checked) ------------- */
+.sw { width: 52px; height: 32px; border-radius: 16px; position: relative; flex: 0 0 auto; }
+.sw i { position: absolute; border-radius: 50%; top: 50%; transform: translateY(-50%); }
+.sw.on  { background: var(--acc); }
+.sw.on  i { width: 24px; height: 24px; right: 4px; background: var(--onprim); }
+.sw.off { background: var(--sv); border: 2px solid var(--out); }
+.sw.off i { width: 16px; height: 16px; left: 6px; background: var(--out); }

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Core locking -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <!-- Lets AppLock evict a declined app from the recents list instead of leaving a live
+         thumbnail of its contents there. Normal permission, granted at install. -->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+
+    <!-- Unlock methods -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
+    <!-- Intruder selfie -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!--
+        Vault import needs no storage permission at all. VaultScreen launches
+        ActivityResultContracts.OpenMultipleDocuments() — the system document picker — which
+        hands back a content URI for exactly the files the user chose, and nothing else. That
+        is the "alternative system picker" Google Play's Photo and Video Permissions policy
+        asks for, so the vault keeps working at full strength with no broad media grant.
+
+        READ_MEDIA_IMAGES / READ_MEDIA_VIDEO were declared here once and never requested by any
+        code path — dead declarations that dragged the whole app into that policy review for
+        nothing. The remove markers below are a ratchet: they keep the permissions out of the
+        merged manifest even if some future dependency declares them in its own manifest, which
+        is how these reappear in a bundle after they have been deleted from the app. They cost
+        nothing at build time and never appear in the shipped manifest themselves.
+    -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" tools:node="remove" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" tools:node="remove" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"
+        tools:node="remove" />
+
+    <!-- Used ONLY by the optional built-in private browser. No analytics, no ads, no telemetry. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
+    <uses-feature android:name="android.hardware.fingerprint" android:required="false" />
+
+    <!--
+        What AppLock needs to see of the other apps on the phone, declared explicitly instead
+        of with QUERY_ALL_PACKAGES.
+
+        QUERY_ALL_PACKAGES is a Google Play "sensitive permission": it is only granted to a
+        short list of app categories (antivirus, file managers, browsers, device search) that
+        an app locker is not on, and using it anyway is a documented rejection reason. Nothing
+        in AppLock actually needs it — every PackageManager call in this codebase is one of
+        three things, and all three are covered below:
+
+          - the lockable-app list, which is queryIntentActivities(MAIN/LAUNCHER) plus the
+            label and icon of each app it returned (AppInfoLoader);
+          - getLaunchIntentForPackage, used to bring a locked app forward and to tell an app
+            apart from a system component (LockEngine, TaskShield) — resolvable for anything
+            matched by the launcher filter;
+          - resolveActivity on the vendor "stop killing this app" pages (OemSettings) and the
+            security pages the tamper guard covers (UninstallGuard), which are a fixed,
+            enumerable list of packages rather than an open-ended query.
+
+        Package names arriving from the accessibility service are not affected by any of this:
+        those come in the event itself, not from PackageManager, so visibility filtering cannot
+        blind the lock to an app that is missing here.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.HOME" />
+        </intent>
+
+        <!-- Vendor autostart / background-launch pages — see OemSettings.autostart. -->
+        <package android:name="com.miui.securitycenter" />
+        <package android:name="com.miui.powerkeeper" />
+        <package android:name="com.huawei.systemmanager" />
+        <package android:name="com.coloros.safecenter" />
+        <package android:name="com.oppo.safe" />
+        <package android:name="com.vivo.permissionmanager" />
+        <package android:name="com.iqoo.secure" />
+        <package android:name="com.oneplus.security" />
+        <package android:name="com.asus.mobilemanager" />
+        <package android:name="com.letv.android.letvsafe" />
+
+        <!-- Pages the tamper guard covers — see UninstallGuard.guarded. -->
+        <package android:name="com.android.settings" />
+        <package android:name="com.android.packageinstaller" />
+        <package android:name="com.google.android.packageinstaller" />
+        <package android:name="com.miui.packageinstaller" />
+        <package android:name="com.samsung.android.packageinstaller" />
+        <package android:name="com.samsung.android.lool" />
+        <package android:name="com.transsion.phonemaster" />
+    </queries>
+
+    <application
+        android:name=".AppLockApp"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:hardwareAccelerated="true"
+        android:extractNativeLibs="false"
+        android:theme="@style/Theme.AppLock">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.AppLock" />
+
+
+        <activity
+            android:name=".ui.lock.LockActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:taskAffinity=".lock"
+            android:excludeFromRecents="true"
+            android:showOnLockScreen="true"
+            android:noHistory="true"
+            android:configChanges="orientation|screenSize|keyboardHidden|uiMode"
+            android:theme="@style/Theme.AppLock" />
+
+        <!-- The one and only launcher entry point. This is an alias rather than a filter on
+             MainActivity because earlier builds shipped a "disguise the icon" feature that
+             swapped between several aliases, and older installs may still have this one
+             explicitly disabled in PackageManager. LauncherIcon re-enables it on every
+             start; removing the alias outright would have left those users with no icon at
+             all and no way back in. -->
+        <activity-alias
+            android:name=".Launcher.Default"
+            android:targetActivity=".MainActivity"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- ============ Services ============ -->
+        <service
+            android:name=".service.AppLockAccessibilityService"
+            android:exported="true"
+            android:label="@string/accessibility_label"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
+        <service
+            android:name=".service.LockGuardService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse"
+            android:stopWithTask="false">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Keeps the on-device app lock active so protected apps stay locked." />
+        </service>
+
+        <service
+            android:name=".service.QuickLockTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_shield"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="false" />
+        </service>
+
+        <service
+            android:name=".service.QuickRelockTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_shield"
+            android:label="Relock all"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <!-- Uninstall protection. An active device admin cannot be uninstalled until it is
+             deactivated, and deactivation lives in Settings — which is why guardSystemPages
+             challenges Settings too. No policies are declared: AppLock asks for admin purely
+             for the undeactivatable-while-active property, and takes no control of the
+             device. -->
+        <receiver
+            android:name=".service.AppLockDeviceAdmin"
+            android:exported="true"
+            android:label="@string/device_admin_label"
+            android:description="@string/device_admin_description"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin" />
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+                <action android:name="android.app.action.DEVICE_ADMIN_DISABLE_REQUESTED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".service.BootReceiver"
+            android:exported="true"
+            android:directBootAware="true">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Package add/remove is not sent to manifest receivers as of Android 8 unless
+             the filter carries a data scheme, which is why this one has one. -->
+        <receiver
+            android:name=".service.PackageInstallReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".service.LockWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/lock_widget_info" />
+        </receiver>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+</manifest>

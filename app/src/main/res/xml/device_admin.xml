@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Deliberately empty.
+
+    AppLock registers as a device admin for exactly one property: Android refuses to
+    uninstall a package while one of its admins is active. It claims no policies — it cannot
+    wipe the device, cannot force a password, cannot lock the screen, cannot disable the
+    camera, and does not want to. Asking for policies we never use would be both a bigger
+    scare in the activation dialog and a bigger thing for a user to trust.
+-->
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android"
+    android:visible="true">
+    <uses-policies />
+</device-admin>

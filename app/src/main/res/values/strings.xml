@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">AppLock</string>
+    <string name="accessibility_label">AppLock protection</string>
+    <string name="device_admin_label">AppLock uninstall protection</string>
+    <string name="device_admin_description">Prevents AppLock from being uninstalled without your PIN. AppLock claims no other powers: it cannot erase your phone, change your screen lock, or restrict the camera.</string>
+    <string name="accessibility_description">Lets AppLock detect when a protected app is opened so it can show the lock screen. AppLock reads only the package name of the app in the foreground. Nothing is recorded, stored off-device, or transmitted.</string>
+    <string name="channel_guard">Protection active</string>
+    <string name="channel_intruder">Intruder alerts</string>
+    <string name="channel_alert">Protection problems</string>
+    <string name="notif_guard_title">AppLock is protecting your apps</string>
+    <string name="notif_guard_text">Tap to open · Long-press to hide this notification</string>
+    <string name="notif_guard_title_broken">AppLock is not locking anything</string>
+    <string name="notif_guard_text_broken">Protection has stopped working — tap to fix</string>
+    <string name="widget_label">AppLock toggle</string>
+</resources>

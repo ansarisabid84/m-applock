@@ -1,0 +1,44 @@
+Lock any app on your Android phone in under a minute. This step-by-step tutorial shows how to set up AppLock, choose the apps to protect, create your PIN, and use timed unlock, profiles and intruder photos.
+
+Get AppLock on Google Play:
+https://play.google.com/store/apps/details?id=com.sabid.applock
+
+CHAPTERS
+00:00 Allow the permissions
+00:16 Choose apps to lock and create your PIN
+00:29 Open a locked app and unlock it for a while
+00:43 Save a profile, see intruder photos and more settings
+
+WHAT YOU'LL LEARN
+• How to allow the permissions AppLock needs. Each one is explained first and nothing is requested until you agree
+• How to pick the apps to lock, and how to lock several at once from the suggestions
+• How to create a PIN (or a pattern) and confirm it
+• What happens when you open a locked app, and how to unlock it
+• Timed unlock: press and hold an app to open it for 15 minutes, 30 minutes, 1 hour or 2 hours, then it relocks itself
+• Lock profiles: save a set of apps as Work, Home or Kids and switch in one tap
+• Intruder photos: after repeated wrong attempts AppLock takes a front-camera photo that stays on your phone. Swipe through them in the Intruders tab
+
+ALSO IN APPLOCK
+• PIN, pattern, fingerprint or your phone's own screen lock
+• Scrambled keypad and invisible pattern
+• Schedules to lock or allow apps at set times
+• Lock history of unlocks and wrong attempts
+• Hide locked apps from the recent-apps screen
+• Encrypted vault for photos, videos and files
+• Private browser with no history and no cookies
+• Uninstall protection
+
+PRIVACY
+No ads, no analytics, no account and no server. Your PIN is stored only as a salted hash. The only network use is the private browser loading pages you type in.
+
+ABOUT THE PERMISSIONS
+AppLock uses the Accessibility service only to read the name of the app that has just opened, so it knows when to show the lock screen. It cannot read your screen, messages or anything you type. It also needs "Display over other apps" to draw the lock screen. Camera, notifications, usage access, battery optimisation and device administrator are optional, and AppLock explains each one before it asks.
+
+Screens in this video are simplified illustrations of the app. Names and photos shown are examples.
+
+Questions or ideas? Leave a comment and I'll read it.
+
+Made by Sabid Ansari: https://www.linkedin.com/in/ansarisabid/
+© 2026 Sabid Ansari. All rights reserved.
+
+#AppLock #Android #AppLockTutorial
