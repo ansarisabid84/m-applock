@@ -21,3 +21,6 @@ keystore.properties
 *.p12
 *.pfx
 keystore/
+
+# Contains a copy of the signing keystore
+build_files.zip
