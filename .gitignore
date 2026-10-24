@@ -14,3 +14,10 @@ keystore.properties
 .claude/
 .vscode/
 .idea/
+
+# Signing keys: never commit these
+*.jks
+*.keystore
+*.p12
+*.pfx
+keystore/
